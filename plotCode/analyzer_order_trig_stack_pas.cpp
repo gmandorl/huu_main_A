@@ -1158,7 +1158,7 @@ for (int i=0;i<nhistos;i++){
         }
 
 		if (hist_names[i].CompareTo("hBDT_VBF_atanh")==0) {
-             data_histos2[i]->GetXaxis()->SetRangeUser(0.,2.4);
+             data_histos2[i]->GetXaxis()->SetRangeUser(0.,0.5);
              data_histos2[i]->Draw("Psame");
         }
 
