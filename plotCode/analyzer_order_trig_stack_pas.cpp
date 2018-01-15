@@ -536,7 +536,7 @@ for (int fileIterator = 0; fileIterator < nfiles; fileIterator++) {
 ////////////////////////////
 ////////////////////////////
 ////////////////////////////
-// 		if (fileIterator>0) histos[hist]->Sumw2(kFALSE);
+		if (fileIterator>0) histos[hist]->Sumw2(kFALSE);             //<--------------------- comment this if you want the integral error in efficiency.txt
 // 		if (fileIterator>0) histos[hist]->Sumw2();
 //		if (hist==1) cout<<fileIterator<<"   "<<histos[1]->Integral() <<endl;
 
@@ -1037,7 +1037,7 @@ for (int i=0;i<nhistos;i++){
                     if (i<nhistos-2) data_histos[i]->Draw("Psame");
 
                 data_histos[nhistos-2]->GetXaxis()->SetRangeUser(-1.,0.5);
-                data_histos[nhistos-1]->GetXaxis()->SetRangeUser(0.,2.2);
+                data_histos[nhistos-1]->GetXaxis()->SetRangeUser(0.,0.5);
 
                 if (i>=nhistos-2) {
                         for (int n = 1; n <= signal_histos[i]->GetXaxis()->GetNbins(); ++n) {
