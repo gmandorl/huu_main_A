@@ -584,7 +584,7 @@ float gen_neg_weight=0;
 	Float_t pos_puweight=0;
 	Float_t all_puweight=0.;
 	Float_t puweight;
-        Float_t puweightUp;
+      Float_t puweightUp;
 	Float_t puweightDown;
 	Float_t PU=1.;
 	Float_t genweight;
@@ -1384,12 +1384,20 @@ Float_t LHE_weights_scale_wgt[10];
     hEnergy_fraction_Parton1->GetXaxis()->SetTitle("E(parton1) [GeV]");
     TH1F *hEnergy_fraction_Parton2=new TH1F("hEnergy_fraction_Parton2","",100,0,1);
     hEnergy_fraction_Parton2->GetXaxis()->SetTitle("E(parton2) [GeV]");
+    TH1F *hEnergy_fraction_Parton1_log=new TH1F("hEnergy_fraction_Parton1_log","",100,-5,1);
+    hEnergy_fraction_Parton1_log->GetXaxis()->SetTitle("E(parton1) [GeV]");
+    TH1F *hEnergy_fraction_Parton2_log=new TH1F("hEnergy_fraction_Parton2_log","",100,-5,1);
+    hEnergy_fraction_Parton2_log->GetXaxis()->SetTitle("E(parton2) [GeV]");
     
     TH1F *hVirtual_Wmass1=new TH1F("hVirtual_Wmass1","",100,-800,100);
     hVirtual_Wmass1->GetXaxis()->SetTitle("M(virtual_mass1) [GeV]");
     TH1F *hVirtual_Wmass2=new TH1F("hVirtual_Wmass2","",100,-800,100);
     hVirtual_Wmass2->GetXaxis()->SetTitle("M(virtual_mass2) [GeV]");
     
+    TH1F *hVirtual_Wmass1_log=new TH1F("hVirtual_Wmass1_log","",100,0,6);
+    hVirtual_Wmass1_log->GetXaxis()->SetTitle("M(virtual_mass1_log) [GeV]");
+    TH1F *hVirtual_Wmass2_log=new TH1F("hVirtual_Wmass2_log","",100,0,6);
+    hVirtual_Wmass2_log->GetXaxis()->SetTitle("M(virtual_mass2_log) [GeV]");   
     TH1F *hWWmass=new TH1F("hWWmass","",100,-100,300);
     hWWmass->GetXaxis()->SetTitle("M(W+W) [GeV]");
     TH1F *hDiffmass=new TH1F("hDiffmass","",100,-250,300);
@@ -1472,8 +1480,8 @@ Float_t LHE_weights_scale_wgt[10];
 //         TH1F* histArray[numArray] = { hMqq, hEtaQQ,hHTsoft,hSoft_n2,hSoft_n5,hSoft_n10,hHTsoftEWK,hSoft_n2EWK,hSoft_n5EWK,hSoft_n10EWK,hHTsoftEWK_bdt,hSoft_n2EWK_bdt,hSoft_n5EWK_bdt, hSoft_n10EWK_bdt,hnPVs, hJet1q_pt, hJet1q_eta, hJet1q_ptd, hJet1q_axis2, hJet1q_mult, hJet2q_pt, hJet2q_eta, hJet2q_ptd, hJet2q_axis2, hJet2q_mult, hmet,   hJet1q_leadTrackPt, hJet2q_leadTrackPt, hqq_pt,hV_mass, hqgl, hqgl2, hZll_mass, hZll_pt, hZll_phi, hZll_eta, hrho, hlepton1_pt, hlepton2_pt, hlepton1_eta, hlepton2_eta, hHT, hDeltaRelQQ, hRptHard, hEtaQQSum, hPhiZQ1, hZll_y, hZll_ystar, hZll_zstar, hMqq_log, hlheV_pt, hJet3_pt, hlheHT_log, hPhiQQ, hJets12_pt_log, hJets12_pt, hJet1q_pt_log, hJet2q_pt_log, hbdt, hbdt_atanh,hbdt_atanh2 , hlepton1_iso03, hlepton2_iso03, hveto_jet3pt_nom, hveto_jet3pt_denom, hveto_ht_nom, hveto_ht_denom, hveto_softht_nom, hveto_softht_denom, hveto_softpt_nom, hveto_softpt_denom, hJet2q_phi, hJet1q_pffhi, hNAdJets, hNAdJets_bdt, hJet3_pt_bdt, hAdJetHT_bdt, hNAdJets_bdt2, hJet3_pt_bdt2, hAdJetHT_bdt2,hNAdJets_mjj1, hJet3_pt_mjj1, hAdJetHT_mjj1,hNAdJets_mjj2, hJet3_pt_mjj2, hAdJetHT_mjj2, hHTsoftEWK_bdt2,hSoft_n2EWK_bdt2,hSoft_n5EWK_bdt2, hSoft_n10EWK_bdt2,hHTsoftEWK_mjj1, hSoft_n2EWK_mjj1,hSoft_n5EWK_mjj1,hSoft_n10EWK_mjj1, hHTsoftEWK_mjj2,hSoft_n2EWK_mjj2,hSoft_n5EWK_mjj2,hSoft_n10EWK_mjj2 ,hJet1q_eta_bdt, hJet1q_eta_bdt2, hJet2q_eta_bdt, hJet2q_eta_bdt2, hsoftleadTrackPt, hsoftleadTrackEta, hAdJetHT, hJet3_eta , hJet3_pt_new , hJet3_eta_bdt, hJet3_eta_bdt2, hThetaStar, hMaxJetBTag};
 
         
-        const int numArray= 142;//64+8 
-        TH1F* histArray[numArray] = { hMqq, hEtaQQ,hSoft_n2,hSoft_n5,hSoft_n10,hHTsoftEWK,hSoft_n2EWK,hSoft_n5EWK,hSoft_n10EWK,hHTsoftEWK_bdt,hSoft_n2EWK_bdt,hSoft_n5EWK_bdt, hSoft_n10EWK_bdt,hnPVs, hJet1q_pt, hJet1q_eta, hJet1q_ptd, hJet1q_axis2, hJet1q_mult, hJet2q_pt, hJet2q_eta, hJet2q_ptd, hJet2q_axis2, hJet2q_mult, hVtype, hVtypeSim, hmet, hJet1q_leadTrackPt, hJet2q_leadTrackPt, hqq_pt, hqgl, hqgl2, hZll_mass, hZll_pt, hZll_phi, hZll_eta, hrho, hlepton1_pt, hlepton2_pt, hlepton1_eta, hlepton2_eta, hHT, hDeltaRelQQ, hRptHard, hEtaQQSum, hPhiZQ1, hZll_y, hZll_ystar, hZll_zstar, hMqq_log, hlheV_pt, hlheNpNLO, hJet3_pt, hlheHT_log, hlheNj, hPhiQQ, hJets12_pt_log, hJets12_pt, hJet1q_pt_log, hJet2q_pt_log, hbdt, hbdt_atanh,hbdt_atanh2 , hlepton1_iso03, hlepton2_iso03, hveto_jet3pt_nom, hveto_jet3pt_denom, hveto_ht_nom, hveto_ht_denom, hveto_softht_nom, hveto_softht_denom, hveto_softpt_nom, hveto_softpt_denom, hJet2q_phi, hJet1q_phi, hNAdJets, hNAdJets_bdt, hJet3_pt_bdt, hAdJetHT_bdt, hNAdJets_bdt2, hJet3_pt_bdt2, hAdJetHT_bdt2, hHTsoftEWK_bdt2,hSoft_n2EWK_bdt2,hSoft_n5EWK_bdt2, hPtSoftJets, hJet1q_eta_bdt, hJet1q_eta_bdt2, hJet2q_eta_bdt, hJet2q_eta_bdt2, hsoftleadTrackPt, hsoftleadTrackEta, hAdJetHT, hJet3_eta, hJet3_etaRatio, hJet3_pt_new , hJet3_eta_bdt, hJet3_eta_bdt2, hBDT_VBF, hBDT_VBF_atanh, hThetaStarJet, hThetaPlanes, hThetaStar, hThetaStarAbs, hMaxJetBTagCSV,hweights_weighted,hweights,hdeltaMRel,hdeltaM, hMaxJetBTagCMVA,hTotalEnergy,hTotalEnergylog,hWWmass,hDiffmass,hpdgId,hgen_mass, hEnergy_fraction_Parton1,hPz,hPzAbs,hInvariant_Masslog,hInvariant_Mass,hthetastar_W2toHW1,hthetastar_W1toHW2,hthetastar_HtoWW, hEnergy_fraction_Parton2,hVirtual_Wmass1,hVirtual_Wmass2,hVirtual_Pt1,hVirtual_Pt2,hVirtual_eta1,hVirtual_eta2,hTheta_HiggsJ1,hTheta_HiggsJ2,hthetastar_W1,hthetastar_W2, hVirtual_phi1,hVirtual_phi2,hParton_M1,hParton_M2,hMaxSecondJetBTagCSV, hMaxSecondJetBTagCMVA, hSelectionCuts};
+        const int numArray= 146;//64+8 
+        TH1F* histArray[numArray] = { hMqq, hEtaQQ,hSoft_n2,hSoft_n5,hSoft_n10,hHTsoftEWK,hSoft_n2EWK,hSoft_n5EWK,hSoft_n10EWK,hHTsoftEWK_bdt,hSoft_n2EWK_bdt,hSoft_n5EWK_bdt, hSoft_n10EWK_bdt,hnPVs, hJet1q_pt, hJet1q_eta, hJet1q_ptd, hJet1q_axis2, hJet1q_mult, hJet2q_pt, hJet2q_eta, hJet2q_ptd, hJet2q_axis2, hJet2q_mult, hVtype, hVtypeSim, hmet, hJet1q_leadTrackPt, hJet2q_leadTrackPt, hqq_pt, hqgl, hqgl2, hZll_mass, hZll_pt, hZll_phi, hZll_eta, hrho, hlepton1_pt, hlepton2_pt, hlepton1_eta, hlepton2_eta, hHT, hDeltaRelQQ, hRptHard, hEtaQQSum, hPhiZQ1, hZll_y, hZll_ystar, hZll_zstar, hMqq_log, hlheV_pt, hlheNpNLO, hJet3_pt, hlheHT_log, hlheNj, hPhiQQ, hJets12_pt_log, hJets12_pt, hJet1q_pt_log, hJet2q_pt_log, hbdt, hbdt_atanh,hbdt_atanh2 , hlepton1_iso03, hlepton2_iso03, hveto_jet3pt_nom, hveto_jet3pt_denom, hveto_ht_nom, hveto_ht_denom, hveto_softht_nom, hveto_softht_denom, hveto_softpt_nom, hveto_softpt_denom, hJet2q_phi, hJet1q_phi, hNAdJets, hNAdJets_bdt, hJet3_pt_bdt, hAdJetHT_bdt, hNAdJets_bdt2, hJet3_pt_bdt2, hAdJetHT_bdt2, hHTsoftEWK_bdt2,hSoft_n2EWK_bdt2,hSoft_n5EWK_bdt2, hPtSoftJets, hJet1q_eta_bdt, hJet1q_eta_bdt2, hJet2q_eta_bdt, hJet2q_eta_bdt2, hsoftleadTrackPt, hsoftleadTrackEta, hAdJetHT, hJet3_eta, hJet3_etaRatio, hJet3_pt_new , hJet3_eta_bdt, hJet3_eta_bdt2, hBDT_VBF, hBDT_VBF_atanh, hThetaStarJet, hThetaPlanes, hThetaStar, hThetaStarAbs, hMaxJetBTagCSV,hweights_weighted,hweights,hdeltaMRel,hdeltaM, hMaxJetBTagCMVA,hTotalEnergy,hTotalEnergylog,hWWmass,hDiffmass,hpdgId,hgen_mass,hEnergy_fraction_Parton2_log,hEnergy_fraction_Parton1_log, hEnergy_fraction_Parton1,hPz,hPzAbs,hInvariant_Masslog,hInvariant_Mass,hthetastar_W2toHW1,hthetastar_W1toHW2,hthetastar_HtoWW, hEnergy_fraction_Parton2,hVirtual_Wmass1,hVirtual_Wmass2,hVirtual_Wmass1_log,hVirtual_Wmass2_log,hVirtual_Pt1,hVirtual_Pt2,hVirtual_eta1,hVirtual_eta2,hTheta_HiggsJ1,hTheta_HiggsJ2,hthetastar_W1,hthetastar_W2, hVirtual_phi1,hVirtual_phi2,hParton_M1,hParton_M2,hMaxSecondJetBTagCSV, hMaxSecondJetBTagCMVA, hSelectionCuts};
      
         
 //
@@ -1731,7 +1739,7 @@ if (data==1) Nsyst_NoConst = 1;
 
   
 
-        if  ((file_tag.CompareTo("TT")==0)) MVAcountMAX = 1000000;  //3900;
+        //if  ((file_tag.CompareTo("TT")==0)) MVAcountMAX = 3300;  //3900;
         if  ((file_tag.CompareTo("DYJetstoLL_madgraph")==0)) MVAcountMAX = 100000;
         if  ((file_tag.CompareTo("DY0JetsToLL_M")==0)) 675;//   323 events        // MVAcountMAX = 1500;    //   713 events
         if  ((file_tag.CompareTo("DY1JetsToLL_M")==0)) 2313; // MVAcountMAX = 5700;
@@ -1840,7 +1848,7 @@ if (data==1) Nsyst_NoConst = 1;
 //     reader->BookMVA("BDTG", "BDTClassification/Classification_BDTG.weights.xml");
 //     reader->BookMVA("BDTG", "/afs/cern.ch/user/a/abonavit/private/tesi/training/CMSSW_8_0_28/src/training/TMVA-v4.2.0/test/weights/TMVAClassification_BDTG_nomoremuaxis2jet2q_v25/Classification_BDTG.weights.xml");
 //         reader->BookMVA("BDTG", "/afs/cern.ch/user/a/abonavit/private/tesi/CMSSW_8_0_28/src/code/BDTClassification/Classification_BDTG.weights_filerootJune_ll_mass_Mqq_DeltaEtaQQ_ll_eta_RptHard_EWKHTsoft_ll_pt_Jet2q_pt.xml");
-        reader->BookMVA("BDTG", "/afs/cern.ch/user/a/abonavit/private/tesi/CMSSW_8_0_28/src/code/BDTClassification/Classification_BDTG.weights_15JAN_ll_mass_Mqq_DeltaEtaQQ_ll_eta_RptHard_EWKHTsoft_ll_pt_Jet2q_pt.xml");
+        reader->BookMVA("BDTG", "/afs/cern.ch/user/a/abonavit/private/tesi/CMSSW_8_0_28/src/code/BDTClassification/trainingForRecoveringJune/Classification_BDTG.weights_JuneOption_ll_mass_Mqq_RptHard_DeltaEtaQQ_llPt_llEta_Jet2qPt_EWKHTsoft.xml");
         
     }  
 
@@ -2328,7 +2336,7 @@ for (int entry=0; entry<nentries;++entry){
 
   
                         
-	//if (Zll_mass < 105 ) continue;
+// 	if (Zll_mass < 105 ) continue;
         if (Zll_mass < 110 ) continue;
         else  ++count12;
         hSelectionCuts->Fill(2, genweight);
@@ -2364,7 +2372,7 @@ for (int entry=0; entry<nentries;++entry){
                 
 		cut_flow[2]+=genweight;
  		if (Qjet2.Pt() < 25) continue;
-//		if (Qjet2.Pt() < 22) continue;
+// 		if (Qjet2.Pt() < 22) continue;
                 else  ++count6;
                 hSelectionCuts->Fill(10, genweight);
                 
@@ -2727,8 +2735,13 @@ for (int entry=0; entry<nentries;++entry){
            
            hEnergy_fraction_Parton1->Fill(E_parton1,genweight);
            hEnergy_fraction_Parton2->Fill(E_parton2,genweight);
+           hEnergy_fraction_Parton1_log->Fill(log(E_parton1),genweight);
+           hEnergy_fraction_Parton2_log->Fill(log(E_parton2),genweight);
            hVirtual_Wmass1->Fill(W_mass_virtual1,genweight);
            hVirtual_Wmass2->Fill(W_mass_virtual2,genweight);
+           hVirtual_Wmass1_log->Fill(log(abs(W_mass_virtual1)),genweight);
+           hVirtual_Wmass2_log->Fill(log(abs(W_mass_virtual2)),genweight);        
+           
            hVirtual_Pt1->Fill(W_Pt_virtual1,genweight);
            hVirtual_Pt2->Fill(W_Pt_virtual2,genweight);
            hVirtual_eta1->Fill(W_eta_virtual1,genweight);
@@ -3121,9 +3134,20 @@ for (int entry=0; entry<nentries;++entry){
 
 //                     std::cout << entry << "\t1:  " << reader->EvaluateMVA("BDTG") << " \t " << TMVA.ll_mass << " \t " << TMVA.Mqq << " \t " << TMVA.RptHard << " \t " << TMVA.DeltaEtaQQ << " \t " << TMVA.ll_pt << " \t " << TMVA.ll_eta << " \t " << TMVA.Jet2q_pt << " \t " << TMVA.EWKHTsoft << std::endl;
 //                     
-//                     TMVA.ll_mass = 125.001;
+//                     TMVA.ll_mass = 126.13;
+//                     TMVA.Mqq = 1879.31;
+//                     TMVA.RptHard = 0.0314452;
+//                     TMVA.DeltaEtaQQ = 6.91397;
 //                     
-//                     std::cout << entry << "\t2:  " << reader->EvaluateMVA("BDTG") << " \t " << TMVA.ll_mass << " \t " << TMVA.Mqq << " \t " << TMVA.RptHard << " \t " << TMVA.DeltaEtaQQ << " \t " << TMVA.ll_pt << " \t " << TMVA.ll_eta << " \t " << TMVA.Jet2q_pt << " \t " << TMVA.EWKHTsoft << std::endl;
+//                     TMVA.ll_pt = 126.873;
+//                     TMVA.ll_eta = 0.124247;
+// 
+//                     TMVA.qgl_2q = 49.9826;
+//                     TMVA.EWKHTsoft=3.25488;
+//                     
+//                     
+//                     
+//                     std::cout << entry << "\t2:  " << atanh((reader->EvaluateMVA("BDTG")+1.)/2.) << " \t " << TMVA.ll_mass << " \t " << TMVA.Mqq << " \t " << TMVA.RptHard << "  \t " << TMVA.DeltaEtaQQ << " \t " << TMVA.ll_pt << " \t " << TMVA.ll_eta << " \t " << TMVA.Jet2q_pt << " \t " << TMVA.EWKHTsoft << std::endl;
                     
                     
 //                     lwt::ValueMap nnout;
