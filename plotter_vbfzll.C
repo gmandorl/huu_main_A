@@ -48,7 +48,7 @@
 #include "TMVA/Tools.h"
 #include "TMVA/Reader.h"
 
-#include "/afs/cern.ch/user/a/abonavit/private/tesi/CMSSW_8_0_28/src/code/ratioDYFilter.h"
+// #include "/afs/cern.ch/user/a/abonavit/private/tesi/CMSSW_8_0_28/src/code/ratioDYFilter.h"
 
 
 //#include <boost/property_tree/ptree.hpp>
@@ -250,6 +250,9 @@ typedef struct {
         Int_t softActivityEWK_njets2;
         Int_t softActivityEWK_njets5;
 	Int_t softActivityEWK_njets10;
+        
+        Float_t randomVariable;
+        Float_t xSection;
 	
 	Float_t Inv_mass;
         Float_t Invariant_Masslog;
@@ -416,6 +419,19 @@ xsec["ST_t-channel_top_4f_inclusiveDecays"] = 136.02;
 xsec["ST_t-channel_antitop_4f_inclusiveDecays"] = 80.95;
 xsec["ST_t-channel_top_4f_leptonDecays"] = 44.33;  //leptonDecays  , multiplied with BR 0.325
 xsec["ST_t-channel_antitop_4f_leptonDecays"] = 26.38;//leptonDecays ,multiplied with BR 0.325
+
+
+//////////////////////  TOP X SEC = 0  //////////////////////////////////////////////////////////////////////
+// xsec["ST_tW"] = 0. ;			//inclusive decays
+// xsec["ST_tW_top"] = 0.  ;			//inclusive decays
+// xsec["ST_tW_antitop"] = 0.  ;			//inclusive decays
+// xsec["ST_s-channel"] = 0.; //leptonic decays
+// xsec["ST_t-channel_top_4f_inclusiveDecays"] = 0.;
+// xsec["ST_t-channel_antitop_4f_inclusiveDecays"] = 0.;
+// xsec["ST_t-channel_top_4f_leptonDecays"] = 0.;  //leptonDecays  , multiplied with BR 0.325
+// xsec["ST_t-channel_antitop_4f_leptonDecays"] = 0.;//leptonDecays ,multiplied with BR 0.325
+// xsec["TT"] =0.;//809.;
+
 
 xsec["WJetsToLNu_amc"]  = 61526.7; //not going to use these ones
 xsec["WJetsToLNu"]  = 61526.7;
@@ -792,8 +808,8 @@ Float_t LHE_weights_scale_wgt[10];
 	ULong64_t evt;
 
 	ULong64_t event; 
-        ratioDYFilter ratiosClass;
-        ratiosClass.setNumber();
+//         ratioDYFilter ratiosClass;
+//         ratiosClass.setNumber();
 
 
     tree_initial->SetBranchAddress("nGenLep",&nGenLep);
@@ -1315,16 +1331,21 @@ Float_t LHE_weights_scale_wgt[10];
 //        }
 
 
-        const int binNUmberBDT = 28;
-        float BDT_bin[binNUmberBDT];
-        for (int n = 0; n < binNUmberBDT-2; ++n ) BDT_bin[n] = n/10.;
-        BDT_bin[26] = 2.8;
-        BDT_bin[27] = 4.0;
 
+//         const int binNUmberBDT = 28;
+//         float BDT_bin[binNUmberBDT];
+//         for (int n = 0; n < binNUmberBDT-2; ++n ) BDT_bin[n] = n/10.;
+//         BDT_bin[26] = 2.8;
+//         BDT_bin[27] = 4.0;
+        
+        const int binNUmberBDT = 31;
+        float BDT_bin[binNUmberBDT] = { 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 4};
 
-     TH1F *hBDT_VBF_atanh = new TH1F("hBDT_VBF_atanh","",binNUmberBDT-1, BDT_bin);
-     hBDT_VBF_atanh->GetXaxis()->SetTitle("tanh^{-1}(( BDT output + 1.)/2.) ");
-    
+     TH1F *hBDT_VBF_atanh_findBinning = new TH1F("hBDT_VBF_atanh_findBinning","",40, 0, 4);
+     hBDT_VBF_atanh_findBinning->GetXaxis()->SetTitle("tanh^{-1}(( BDT output + 1.)/2.) ");
+        
+    TH1F *hBDT_VBF_atanh = new TH1F("hBDT_VBF_atanh","",binNUmberBDT-1, BDT_bin);
+    hBDT_VBF_atanh->GetXaxis()->SetTitle("tanh^{-1}(( BDT output + 1.)/2.) ");
     
     int bin_new_NumberBDT = 50;
     float upperLimitBDT = 1.;//bin_new_NumberBDT*0.2;
@@ -1480,8 +1501,8 @@ Float_t LHE_weights_scale_wgt[10];
 //         TH1F* histArray[numArray] = { hMqq, hEtaQQ,hHTsoft,hSoft_n2,hSoft_n5,hSoft_n10,hHTsoftEWK,hSoft_n2EWK,hSoft_n5EWK,hSoft_n10EWK,hHTsoftEWK_bdt,hSoft_n2EWK_bdt,hSoft_n5EWK_bdt, hSoft_n10EWK_bdt,hnPVs, hJet1q_pt, hJet1q_eta, hJet1q_ptd, hJet1q_axis2, hJet1q_mult, hJet2q_pt, hJet2q_eta, hJet2q_ptd, hJet2q_axis2, hJet2q_mult, hmet,   hJet1q_leadTrackPt, hJet2q_leadTrackPt, hqq_pt,hV_mass, hqgl, hqgl2, hZll_mass, hZll_pt, hZll_phi, hZll_eta, hrho, hlepton1_pt, hlepton2_pt, hlepton1_eta, hlepton2_eta, hHT, hDeltaRelQQ, hRptHard, hEtaQQSum, hPhiZQ1, hZll_y, hZll_ystar, hZll_zstar, hMqq_log, hlheV_pt, hJet3_pt, hlheHT_log, hPhiQQ, hJets12_pt_log, hJets12_pt, hJet1q_pt_log, hJet2q_pt_log, hbdt, hbdt_atanh,hbdt_atanh2 , hlepton1_iso03, hlepton2_iso03, hveto_jet3pt_nom, hveto_jet3pt_denom, hveto_ht_nom, hveto_ht_denom, hveto_softht_nom, hveto_softht_denom, hveto_softpt_nom, hveto_softpt_denom, hJet2q_phi, hJet1q_pffhi, hNAdJets, hNAdJets_bdt, hJet3_pt_bdt, hAdJetHT_bdt, hNAdJets_bdt2, hJet3_pt_bdt2, hAdJetHT_bdt2,hNAdJets_mjj1, hJet3_pt_mjj1, hAdJetHT_mjj1,hNAdJets_mjj2, hJet3_pt_mjj2, hAdJetHT_mjj2, hHTsoftEWK_bdt2,hSoft_n2EWK_bdt2,hSoft_n5EWK_bdt2, hSoft_n10EWK_bdt2,hHTsoftEWK_mjj1, hSoft_n2EWK_mjj1,hSoft_n5EWK_mjj1,hSoft_n10EWK_mjj1, hHTsoftEWK_mjj2,hSoft_n2EWK_mjj2,hSoft_n5EWK_mjj2,hSoft_n10EWK_mjj2 ,hJet1q_eta_bdt, hJet1q_eta_bdt2, hJet2q_eta_bdt, hJet2q_eta_bdt2, hsoftleadTrackPt, hsoftleadTrackEta, hAdJetHT, hJet3_eta , hJet3_pt_new , hJet3_eta_bdt, hJet3_eta_bdt2, hThetaStar, hMaxJetBTag};
 
         
-        const int numArray= 146;//64+8 
-        TH1F* histArray[numArray] = { hMqq, hEtaQQ,hSoft_n2,hSoft_n5,hSoft_n10,hHTsoftEWK,hSoft_n2EWK,hSoft_n5EWK,hSoft_n10EWK,hHTsoftEWK_bdt,hSoft_n2EWK_bdt,hSoft_n5EWK_bdt, hSoft_n10EWK_bdt,hnPVs, hJet1q_pt, hJet1q_eta, hJet1q_ptd, hJet1q_axis2, hJet1q_mult, hJet2q_pt, hJet2q_eta, hJet2q_ptd, hJet2q_axis2, hJet2q_mult, hVtype, hVtypeSim, hmet, hJet1q_leadTrackPt, hJet2q_leadTrackPt, hqq_pt, hqgl, hqgl2, hZll_mass, hZll_pt, hZll_phi, hZll_eta, hrho, hlepton1_pt, hlepton2_pt, hlepton1_eta, hlepton2_eta, hHT, hDeltaRelQQ, hRptHard, hEtaQQSum, hPhiZQ1, hZll_y, hZll_ystar, hZll_zstar, hMqq_log, hlheV_pt, hlheNpNLO, hJet3_pt, hlheHT_log, hlheNj, hPhiQQ, hJets12_pt_log, hJets12_pt, hJet1q_pt_log, hJet2q_pt_log, hbdt, hbdt_atanh,hbdt_atanh2 , hlepton1_iso03, hlepton2_iso03, hveto_jet3pt_nom, hveto_jet3pt_denom, hveto_ht_nom, hveto_ht_denom, hveto_softht_nom, hveto_softht_denom, hveto_softpt_nom, hveto_softpt_denom, hJet2q_phi, hJet1q_phi, hNAdJets, hNAdJets_bdt, hJet3_pt_bdt, hAdJetHT_bdt, hNAdJets_bdt2, hJet3_pt_bdt2, hAdJetHT_bdt2, hHTsoftEWK_bdt2,hSoft_n2EWK_bdt2,hSoft_n5EWK_bdt2, hPtSoftJets, hJet1q_eta_bdt, hJet1q_eta_bdt2, hJet2q_eta_bdt, hJet2q_eta_bdt2, hsoftleadTrackPt, hsoftleadTrackEta, hAdJetHT, hJet3_eta, hJet3_etaRatio, hJet3_pt_new , hJet3_eta_bdt, hJet3_eta_bdt2, hBDT_VBF, hBDT_VBF_atanh, hThetaStarJet, hThetaPlanes, hThetaStar, hThetaStarAbs, hMaxJetBTagCSV,hweights_weighted,hweights,hdeltaMRel,hdeltaM, hMaxJetBTagCMVA,hTotalEnergy,hTotalEnergylog,hWWmass,hDiffmass,hpdgId,hgen_mass,hEnergy_fraction_Parton2_log,hEnergy_fraction_Parton1_log, hEnergy_fraction_Parton1,hPz,hPzAbs,hInvariant_Masslog,hInvariant_Mass,hthetastar_W2toHW1,hthetastar_W1toHW2,hthetastar_HtoWW, hEnergy_fraction_Parton2,hVirtual_Wmass1,hVirtual_Wmass2,hVirtual_Wmass1_log,hVirtual_Wmass2_log,hVirtual_Pt1,hVirtual_Pt2,hVirtual_eta1,hVirtual_eta2,hTheta_HiggsJ1,hTheta_HiggsJ2,hthetastar_W1,hthetastar_W2, hVirtual_phi1,hVirtual_phi2,hParton_M1,hParton_M2,hMaxSecondJetBTagCSV, hMaxSecondJetBTagCMVA, hSelectionCuts};
+        const int numArray= 147;//64+8 
+        TH1F* histArray[numArray] = { hMqq, hEtaQQ,hSoft_n2,hSoft_n5,hSoft_n10,hHTsoftEWK,hSoft_n2EWK,hSoft_n5EWK,hSoft_n10EWK,hHTsoftEWK_bdt,hSoft_n2EWK_bdt,hSoft_n5EWK_bdt, hSoft_n10EWK_bdt,hnPVs, hJet1q_pt, hJet1q_eta, hJet1q_ptd, hJet1q_axis2, hJet1q_mult, hJet2q_pt, hJet2q_eta, hJet2q_ptd, hJet2q_axis2, hJet2q_mult, hVtype, hVtypeSim, hmet, hJet1q_leadTrackPt, hJet2q_leadTrackPt, hqq_pt, hqgl, hqgl2, hZll_mass, hZll_pt, hZll_phi, hZll_eta, hrho, hlepton1_pt, hlepton2_pt, hlepton1_eta, hlepton2_eta, hHT, hDeltaRelQQ, hRptHard, hEtaQQSum, hPhiZQ1, hZll_y, hZll_ystar, hZll_zstar, hMqq_log, hlheV_pt, hlheNpNLO, hJet3_pt, hlheHT_log, hlheNj, hPhiQQ, hJets12_pt_log, hJets12_pt, hJet1q_pt_log, hJet2q_pt_log, hbdt, hbdt_atanh,hbdt_atanh2 , hlepton1_iso03, hlepton2_iso03, hveto_jet3pt_nom, hveto_jet3pt_denom, hveto_ht_nom, hveto_ht_denom, hveto_softht_nom, hveto_softht_denom, hveto_softpt_nom, hveto_softpt_denom, hJet2q_phi, hJet1q_phi, hNAdJets, hNAdJets_bdt, hJet3_pt_bdt, hAdJetHT_bdt, hNAdJets_bdt2, hJet3_pt_bdt2, hAdJetHT_bdt2, hHTsoftEWK_bdt2,hSoft_n2EWK_bdt2,hSoft_n5EWK_bdt2, hPtSoftJets, hJet1q_eta_bdt, hJet1q_eta_bdt2, hJet2q_eta_bdt, hJet2q_eta_bdt2, hsoftleadTrackPt, hsoftleadTrackEta, hAdJetHT, hJet3_eta, hJet3_etaRatio, hJet3_pt_new , hJet3_eta_bdt, hJet3_eta_bdt2, hBDT_VBF, hBDT_VBF_atanh, hBDT_VBF_atanh_findBinning, hThetaStarJet, hThetaPlanes, hThetaStar, hThetaStarAbs, hMaxJetBTagCSV,hweights_weighted,hweights,hdeltaMRel,hdeltaM, hMaxJetBTagCMVA,hTotalEnergy,hTotalEnergylog,hWWmass,hDiffmass,hpdgId,hgen_mass,hEnergy_fraction_Parton2_log,hEnergy_fraction_Parton1_log, hEnergy_fraction_Parton1,hPz,hPzAbs,hInvariant_Masslog,hInvariant_Mass,hthetastar_W2toHW1,hthetastar_W1toHW2,hthetastar_HtoWW, hEnergy_fraction_Parton2,hVirtual_Wmass1,hVirtual_Wmass2,hVirtual_Wmass1_log,hVirtual_Wmass2_log,hVirtual_Pt1,hVirtual_Pt2,hVirtual_eta1,hVirtual_eta2,hTheta_HiggsJ1,hTheta_HiggsJ2,hthetastar_W1,hthetastar_W2, hVirtual_phi1,hVirtual_phi2,hParton_M1,hParton_M2,hMaxSecondJetBTagCSV, hMaxSecondJetBTagCMVA, hSelectionCuts};
      
         
 //
@@ -1699,6 +1720,11 @@ if (data==1) Nsyst_NoConst = 1;
         treeMVA->Branch("softActivityEWK_njets2",&TMVA.softActivityEWK_njets2,"softActivityEWK_njets2/I");
         treeMVA->Branch("softActivityEWK_njets5",&TMVA.softActivityEWK_njets5,"softActivityEWK_njets5/I");
         treeMVA->Branch("softActivityEWK_njets10",&TMVA.softActivityEWK_njets10,"softActivityEWK_njets10/I");
+        
+        
+        treeMVA->Branch("randomVariable",&TMVA.randomVariable,"randomVariable/F");
+        treeMVA->Branch("xSection",&TMVA.xSection,"CrossSectionOfTheSample/F");
+
  
 
         treeMVA->Branch("Inv_mass",&TMVA.Inv_mass,"Inv_mass/F");
@@ -1719,7 +1745,7 @@ if (data==1) Nsyst_NoConst = 1;
 	treeMVA->Branch("jets12",&TMVA.jets12,"jets12/F");
 	treeMVA->Branch("W_phi_virtual2",&TMVA.W_phi_virtual2,"W_phi_virtual2/F");
         treeMVA->Branch("thetastarW1",&TMVA.thetastarW1,"thetastarW1/F");
-	treeMVA->Branch("thetastarW2",&TMVA.thetastarW2,"thetastarW2/I");
+	treeMVA->Branch("thetastarW2",&TMVA.thetastarW2,"thetastarW2/F");
 	treeMVA->Branch("thetastarW2toHW1",&TMVA.thetastarW2toHW1,"thetastarW2toHW1/F");
 	treeMVA->Branch("thetastarW1toHW2",&TMVA.thetastarW1toHW2,"thetastarW1toHW2/F");
 	treeMVA->Branch("thetastarHtoWW",&TMVA.thetastarHtoWW,"thetastarHtoWW/F");  
@@ -1746,7 +1772,7 @@ if (data==1) Nsyst_NoConst = 1;
         if  ((file_tag.CompareTo("DY2JetsToLL_M")==0)) 2565; // MVAcountMAX = 4600;
         if  ((file_tag.CompareTo("DY3JetsToLL_M")==0)) 1591; // MVAcountMAX = 2550;
         if  ((file_tag.CompareTo("DY4JetsToLL_M")==0)) 1197; // MVAcountMAX = 1970;
-        if  ((file_tag.CompareTo("VBF_HToMuMu")==0)) MVAcountMAX = 200000;  //30000;//
+//         if  ((file_tag.CompareTo("VBF_HToMuMu")==0)) MVAcountMAX = 200000;  //30000;//
 
         if  ((file_tag.CompareTo("DYJetstoLL_amc_Filter105")==0)) MVAcountMAX = 1000000;  
         if  ((file_tag.CompareTo("DYJetsToLL_M-105To160-madgraphMLM")==0)) MVAcountMAX = 1000000;  
@@ -1759,7 +1785,7 @@ if (data==1) Nsyst_NoConst = 1;
 //         if  ((file_tag.CompareTo("DY2JetsToLL_M")==0)) MVAcountMAX = 4600;
 //         if  ((file_tag.CompareTo("DY3JetsToLL_M")==0)) MVAcountMAX = 2550;
 //         if  ((file_tag.CompareTo("DY4JetsToLL_M")==0)) MVAcountMAX = 1970;
-        if  ((file_tag.CompareTo("VBF_HToMuMu")==0)) MVAcountMAX = 30000;  
+//         if  ((file_tag.CompareTo("VBF_HToMuMu")==0)) MVAcountMAX = 30000;  
 
 
 
@@ -1780,19 +1806,38 @@ if (data==1) Nsyst_NoConst = 1;
 
 
     if (plotOutput) {
-   
+        
+// // // // // // // // //    VARIABILI GIUGNO
+// // // // // // // // //     reader->AddVariable("ll_mass",&TMVA.ll_mass);    
+// // // // // // // // //     reader->AddVariable("Mqq",&TMVA.Mqq);
+// // // // // // // // //     
+// // // // // // // // //     reader->AddVariable("RptHard",&TMVA.RptHard);
+// // // // // // // // //     reader->AddVariable("DeltaEtaQQ",&TMVA.DeltaEtaQQ);
+// // // // // // // // // //    
+// // // // // // // // //     reader->AddVariable("ll_pt",&TMVA.ll_pt);
+// // // // // // // // //     reader->AddVariable("ll_eta",&TMVA.ll_eta);
+// // // // // // // // //     reader->AddVariable("Jet2q_pt",&TMVA.Jet2q_pt);
+// // // // // // // // //      reader->AddVariable("EWKHTsoft",&TMVA.EWKHTsoft);
+    
+        
+        
     reader->AddVariable("ll_mass",&TMVA.ll_mass);    
     reader->AddVariable("Mqq",&TMVA.Mqq);
     
     reader->AddVariable("RptHard",&TMVA.RptHard);
-    reader->AddVariable("DeltaEtaQQ",&TMVA.DeltaEtaQQ);
-//    
-    reader->AddVariable("ll_pt",&TMVA.ll_pt);
-    reader->AddVariable("ll_eta",&TMVA.ll_eta);
-    reader->AddVariable("Jet2q_pt",&TMVA.Jet2q_pt);
-     reader->AddVariable("EWKHTsoft",&TMVA.EWKHTsoft);
+    reader->AddVariable("ll_zstar",&TMVA.ll_zstar);
     
-   
+//     reader->AddVariable("softActivityEWK_njets5",&TMVA.softActivityEWK_njets5);   // this is int
+    reader->AddVariable("softActivityEWK_njets5",&temp_softActivityEWK_njets5);   // this is float
+
+    
+    reader->AddVariable("ll_pt",&TMVA.ll_pt);
+    
+    
+    reader->AddVariable("W_mass_virtual2",&TMVA.W_mass_virtual2); 
+    reader->AddVariable("W_Pt_virtual1",&TMVA.W_Pt_virtual1);
+    
+
     
     
 /*    reader->AddVariable("EWKHTsoft",&TMVA.EWKHTsoft);
@@ -1848,8 +1893,8 @@ if (data==1) Nsyst_NoConst = 1;
 //     reader->BookMVA("BDTG", "BDTClassification/Classification_BDTG.weights.xml");
 //     reader->BookMVA("BDTG", "/afs/cern.ch/user/a/abonavit/private/tesi/training/CMSSW_8_0_28/src/training/TMVA-v4.2.0/test/weights/TMVAClassification_BDTG_nomoremuaxis2jet2q_v25/Classification_BDTG.weights.xml");
 //         reader->BookMVA("BDTG", "/afs/cern.ch/user/a/abonavit/private/tesi/CMSSW_8_0_28/src/code/BDTClassification/Classification_BDTG.weights_filerootJune_ll_mass_Mqq_DeltaEtaQQ_ll_eta_RptHard_EWKHTsoft_ll_pt_Jet2q_pt.xml");
-        reader->BookMVA("BDTG", "/afs/cern.ch/user/a/abonavit/private/tesi/CMSSW_8_0_28/src/code/BDTClassification/trainingForRecoveringJune/Classification_BDTG.weights_JuneOption_ll_mass_Mqq_RptHard_DeltaEtaQQ_llPt_llEta_Jet2qPt_EWKHTsoft.xml");
-        
+//         reader->BookMVA("BDTG", "/afs/cern.ch/user/a/abonavit/private/tesi/CMSSW_8_0_28/src/code/BDTClassification/trainingForRecoveringJune/Classification_BDTG.weights_JuneOption_ll_mass_Mqq_RptHard_DeltaEtaQQ_llPt_llEta_Jet2qPt_EWKHTsoft.xml");
+        reader->BookMVA("BDTG", "/afs/cern.ch/user/a/abonavit/private/tesi/CMSSW_8_0_28/src/code/BDTClassification/januaryTraining/Classification_BDTG.weights_80000Event_200Tree_4Deep_mll_Mqq_RptHard_llZstar_softN5_llPt_Wmass2_Wpt1.xml");
     }  
 
    // /afs/cern.ch/user/a/abonavit/private/tesi/training/CMSSW_8_0_28/src/training/TMVA-v4.2.0/test/weights/TMVAClassification_BDTG_nomoremuaxis2jet2q_v25
@@ -1923,6 +1968,8 @@ for (int entry=0; entry<nentries;++entry){
         TMVA.softActivityEWK_njets2=0;
         TMVA.softActivityEWK_njets5=0;
 	TMVA.softActivityEWK_njets10=0;
+        TMVA.randomVariable=0;
+        TMVA.xSection=0;
         TMVA.weightMVA=0;
         TMVA.deltaM=0;
         
@@ -2045,8 +2092,8 @@ for (int entry=0; entry<nentries;++entry){
                 maxBTagCMVA = Jet.btagCMVA[i];
             }
 
-            if (maxBTagCSV > Jet.btagCSV[i] && maxSecondBTagCSV < Jet.btagCSV[i]) maxSecondBTagCSV < Jet.btagCSV[i];
-            if (maxBTagCMVA > Jet.btagCMVA[i] && maxSecondBTagCMVA < Jet.btagCMVA[i]) maxSecondBTagCMVA < Jet.btagCMVA[i];
+            if (maxBTagCSV > Jet.btagCSV[i] && maxSecondBTagCSV < Jet.btagCSV[i]) maxSecondBTagCSV = Jet.btagCSV[i];
+            if (maxBTagCMVA > Jet.btagCMVA[i] && maxSecondBTagCMVA < Jet.btagCMVA[i]) maxSecondBTagCMVA = Jet.btagCMVA[i];
 
             bool condition = false;
             if (good_jets < 2) condition = true;
@@ -2272,7 +2319,7 @@ for (int entry=0; entry<nentries;++entry){
 
                 
 		string file_tag_str = file_tag.Data();  //ALREADY DECLARED: CHECK!
-		if  (file_tag_str.find("DYJetstoLL")!=std::string::npos)  genweight*=ptWeightEWK(nGenVbosons, GenVbosons_pt_first, VtypeSim, GenVbosons_pdgId_first); 
+		if  (file_tag_str.find/*("DYJetstoLL"*/)!=std::string::npos)  genweight*=ptWeightEWK(nGenVbosons, GenVbosons_pt_first, VtypeSim, GenVbosons_pdgId_first); 
 
 
 		Float_t Mqq_log = TMath::Log(Mqq);	
@@ -3113,6 +3160,9 @@ for (int entry=0; entry<nentries;++entry){
 //                    TMVA.weightMVA = weightMVA;
                    TMVA.weightMVA = 1.;
 
+                   
+                    TMVA.randomVariable = gRandom->Rndm();
+                    TMVA.xSection = xsec[file_tag];
                     MVAcount +=1;
                     if ( MVAtree_to_fill && MVAcount < MVAcountMAX) treeMVA->Fill();   
 
@@ -3129,6 +3179,7 @@ for (int entry=0; entry<nentries;++entry){
                      
                         hBDT_VBF->Fill(BDT_VBF-0.01,genweight);
                         hBDT_VBF_atanh->Fill(atanh((BDT_VBF+1.)/2.),genweight);
+                        hBDT_VBF_atanh_findBinning->Fill(atanh((BDT_VBF+1.)/2.),genweight);
                         
                     }
 

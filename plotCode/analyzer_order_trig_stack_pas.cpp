@@ -260,7 +260,7 @@ leg_2000 ->SetTextSize(0.025);
 
 
 const int nhistos =109; //79 //40//52
-TString hist_names[nhistos]={"hMqq", "hZll_mass", "hSelectionCuts","hdeltaM", "hdeltaMRel", "hJet1q_pt","hEtaQQ","hHTsoftEWK","hSoft_n2EWK","hSoft_n5EWK","hSoft_n10EWK","hPVs", "hJet1q_eta","hJet1q_phi", "hJet2q_phi", "hJet1q_ptd", "hJet1q_axis2", "hJet1q_mult", "hJet2q_pt", "hJet2q_eta", "hJet2q_ptd", "hJet2q_axis2","hJet2q_mult", "hVtype", "hVtypeSim", "hmet","hJet1q_leadTrackPt", "hJet2q_leadTrackPt", "hqq_pt", "hqgl", "hqgl2", "hZll_pt", "hZll_phi", "hZll_eta","hrho","hlepton1_pt", "hlepton2_pt", "hlepton1_eta", "hlepton2_eta","hlepton1_iso03", "hlepton2_iso03", "hDeltaRelQQ", "hRptHard", "hEtaQQSum", "hPhiZQ1", "hZll_y", "hZll_ystar", "hZll_zstar", "hMqq_log", "hlheV_pt","hJet3_pt","hPhiQQ", "hJet1q_pt_log", "hJet2q_pt_log","hJets12_pt","hJets12_pt_log", "hsoftleadTrackEta", "hAdJetHT", "hJet3_eta", "hJet3_pt_new", "hMaxJetBTagCSV","hVirtual_Pt1","hVirtual_Pt2", "hMaxJetBTagCMVA","hthetastar_W1","hthetastar_W2", "hMaxSecondJetBTagCMVA", "hMaxSecondJetBTagCSV","hVirtual_eta1","hVirtual_eta2","hNAdJets","hgen_mass", "hlheNj","hlheNpNLO", "hHT","hlheHT_log","hweights_weighted","hweights","hVirtual_Wmass1_log","hVirtual_Wmass2_log", "hThetaStarJet","hThetaPlanes","hThetaStar","hDiffmass","hThetaStarAbs","hTheta_HiggsJ1","hTheta_HiggsJ2","hthetastar_W2toHW1","hthetastar_W1toHW2","hthetastar_HtoWW", "hTotalEnergy","hTotalEnergylog","hVirtual_phi1","hParton_M1","hParton_M2","hVirtual_phi2","hWWmass","hEnergy_fraction_Parton1_log", "hEnergy_fraction_Parton1","hPz","hPzAbs" ,"hVirtual_Wmass1","hVirtual_Wmass2", "hInvariant_Masslog","hInvariant_Mass" ,"hEnergy_fraction_Parton2" "hEnergy_fraction_Parton2_log","hBDT_VBF","hBDT_VBF_atanh"};
+TString hist_names[nhistos]={"hMqq", "hZll_mass", "hSelectionCuts","hdeltaM", "hdeltaMRel", "hJet1q_pt","hEtaQQ","hHTsoftEWK","hSoft_n2EWK","hSoft_n5EWK","hSoft_n10EWK","hPVs", "hJet1q_eta","hJet1q_phi", "hJet2q_phi", "hJet1q_ptd", "hJet1q_axis2", "hJet1q_mult", "hJet2q_pt", "hJet2q_eta", "hJet2q_ptd", "hJet2q_axis2","hJet2q_mult", "hVtype", "hVtypeSim", "hmet","hJet1q_leadTrackPt", "hJet2q_leadTrackPt", "hqq_pt", "hqgl", "hqgl2", "hZll_pt", "hZll_phi", "hZll_eta","hrho","hlepton1_pt", "hlepton2_pt", "hlepton1_eta", "hlepton2_eta","hlepton1_iso03", "hlepton2_iso03", "hDeltaRelQQ", "hRptHard", "hEtaQQSum", "hPhiZQ1", "hZll_y", "hZll_ystar", "hZll_zstar", "hMqq_log", "hlheV_pt","hJet3_pt","hPhiQQ", "hJet1q_pt_log", "hJet2q_pt_log","hJets12_pt","hJets12_pt_log", "hsoftleadTrackEta", "hAdJetHT", "hJet3_eta", "hJet3_pt_new", "hMaxJetBTagCSV","hVirtual_Pt1","hVirtual_Pt2", "hMaxJetBTagCMVA","hthetastar_W1","hthetastar_W2", "hMaxSecondJetBTagCMVA", "hMaxSecondJetBTagCSV","hVirtual_eta1","hVirtual_eta2","hNAdJets","hgen_mass", "hlheNj","hlheNpNLO", "hHT","hlheHT_log","hweights_weighted","hweights","hVirtual_Wmass1_log","hVirtual_Wmass2_log", "hThetaStarJet","hThetaPlanes","hThetaStar","hDiffmass","hThetaStarAbs","hTheta_HiggsJ1","hTheta_HiggsJ2","hthetastar_W2toHW1","hthetastar_W1toHW2","hthetastar_HtoWW", "hTotalEnergy","hTotalEnergylog","hVirtual_phi1","hParton_M1","hParton_M2","hVirtual_phi2","hWWmass","hEnergy_fraction_Parton1_log", "hEnergy_fraction_Parton1","hPz","hPzAbs" ,"hVirtual_Wmass1","hVirtual_Wmass2", "hInvariant_Masslog","hInvariant_Mass" ,"hEnergy_fraction_Parton2", "hEnergy_fraction_Parton2_log","hBDT_VBF","hBDT_VBF_atanh"};
 
 
 
@@ -335,6 +335,7 @@ TH1F *hBkgJESLo[nhistos];
 int files=0; 
 THStack *stacks[nhistos];
 TH1F * stackHisto[nhistos];
+
 for (int i=0;i<nhistos;++i){
 	stacks[i] = new THStack(stacks_names[i],"");
 }
@@ -454,7 +455,7 @@ for (int counter_ratio=0; counter_ratio < 5;counter_ratio++) {
 
 
     float tmp_ratio = (dataInt-MCint)/DYint;
-    ratio[counter_ratio] = tmp_ratio;
+    ratio[counter_ratio] = tmp_ratio;//  * 0.96230483 ;
     ratioError[counter_ratio] = DYError/DYint*ratio[counter_ratio];
 //     ratio[counter_ratio] = 1.;
     if(counter_ratio == 0)  cout << "ratio  "  << counter_ratio << " : " << ratio[0] <<   " \t\t DYint : " << DYint <<   " \t\t MCint : " << MCint  <<   " \t\t dataInt : " << dataInt << endl;
@@ -488,6 +489,7 @@ for (int fileIterator = 0; fileIterator < nfiles; fileIterator++) {
 	//	if (hist_names[hist].CompareTo("hlepton2_eta")==0) ((TH1F*)file_initial->Get(hist_names[hist]))->Rebin(4);
 // 		if (hist_names[hist].CompareTo("hbdt")==0) ((TH1F*)file_initial->Get(hist_names[hist]))->Rebin(4);
 // 		if (hist_names[hist].CompareTo("hbdt_atanh")==0) ((TH1F*)file_initial->Get(hist_names[hist]))->Rebin(10);
+                
 		histos[hist] = (TH1F*)file_initial->Get(hist_names[hist])->Clone("h");
                 if(file_name_tag.find("DYJetstoLL")!=std::string::npos)   histos_check[hist] = (TH1F*)file_initial->Get(hist_names[hist])->Clone("h");
                     
@@ -504,8 +506,7 @@ for (int fileIterator = 0; fileIterator < nfiles; fileIterator++) {
 		if (file_name_tag.find("DYJetstoLL")!=std::string::npos)  histos[hist]->Scale(ratio[0]);  
 //                 if ((file_name_tag.find("HToMuMu")==std::string::npos) && (file_name_tag.find("SingleMuon")==std::string::npos))  histos[hist]->Scale(ratio[0]);  
                 
-                
-                
+
                 
                 
                 add_underFlow_overFlow(histos[hist]);
@@ -536,10 +537,13 @@ for (int fileIterator = 0; fileIterator < nfiles; fileIterator++) {
 ////////////////////////////
 ////////////////////////////
 ////////////////////////////
-		if (fileIterator>0) histos[hist]->Sumw2(kFALSE);             //<--------------------- comment this if you want the integral error in efficiency.txt
-// 		if (fileIterator>0) histos[hist]->Sumw2();
+// 		if (fileIterator>0) histos[hist]->Sumw2(kFALSE);             //<--------------------- comment this if you want the integral error in efficiency.txt
+		if (fileIterator>0) histos[hist]->Sumw2();
 //		if (hist==1) cout<<fileIterator<<"   "<<histos[1]->Integral() <<endl;
 
+                
+                 
+                
 
                 float signalMultipyFactor = 20.;
 //                 if ((hist == nhistos-3) || (hist == nhistos-3))  signalMultipyFactor = 20.;
@@ -549,8 +553,8 @@ for (int fileIterator = 0; fileIterator < nfiles; fileIterator++) {
 			signal_histos[hist]->Scale(lumi);
 
 			signal_histos[hist]->Scale(signalMultipyFactor);
-			signal_histos[hist]->Sumw2(kFALSE);
-// 			signal_histos[hist]->Sumw2();
+// 			signal_histos[hist]->Sumw2(kFALSE);
+			signal_histos[hist]->Sumw2();
 			signal_histos[hist]->SetLineColor(LINECOLOR[fileIterator]);
 			signal_histos[hist]->SetLineWidth(LINEWIDTH[fileIterator]);
 // 			signal_histos[hist]->SetLineColor(kRed+2);
@@ -569,8 +573,8 @@ for (int fileIterator = 0; fileIterator < nfiles; fileIterator++) {
                         gluonFu_histos[hist]->Scale(lumi);
 
 			gluonFu_histos[hist]->Scale(signalMultipyFactor);
-			gluonFu_histos[hist]->Sumw2(kFALSE);
-// 			gluonFu_histos[hist]->Sumw2();
+// 			gluonFu_histos[hist]->Sumw2(kFALSE);
+			gluonFu_histos[hist]->Sumw2();
 			gluonFu_histos[hist]->SetLineColor(LINECOLOR[fileIterator]);
                         gluonFu_histos[hist]->SetLineWidth(LINEWIDTH[fileIterator]);
                         gluonFu_histos[hist]->SetLineStyle(2);
@@ -598,9 +602,14 @@ for (int fileIterator = 0; fileIterator < nfiles; fileIterator++) {
 		}
 	 	//if (files>=bg_begin) stacks[hist]->Add(histos[hist]);
 	 	if (fileIterator>=1) {
-                    stacks[hist]->Add(histos[hist]);
-                    if (fileIterator==1)stackHisto[hist] = (TH1F*)file_initial->Get(hist_names[hist])->Clone("stackHisto");
+                    if (fileIterator==1){stackHisto[hist] = (TH1F*)  histos[hist]->Clone("stackHisto");        stackHisto[hist]->Sumw2();}
                     else stackHisto[hist]->Add(histos[hist]);
+                    histos[hist]->Sumw2(kFALSE);
+                    stacks[hist]->Add(histos[hist]);
+                    
+ //              if (fileIterator==1)(TH1F*)  file_initial->Get(hist_names[hist])->Clone("stackHisto");
+                    
+                    if (hist_names[hist].CompareTo("hBDT_VBF_atanh")==0) std::cout << "DEBUG     "  <<  stackHisto[hist]->GetBinContent(30) << " \t " << histos[hist]->GetBinContent(30) << " \t " << histos[hist]->GetBinError(30)  << std::endl;
                 }
 		if (hist==0) histos_for_legened[fileIterator] = (TH1F*)histos[0]->Clone("newd");
 		if (fileIterator==bg_begin)	discr_histos[hist] = (TH1F*)file_initial->Get(hist_names[hist])->Clone("discr");
@@ -626,7 +635,11 @@ for (int fileIterator = 0; fileIterator < nfiles; fileIterator++) {
             if (fileIterator==nfiles-1) out_efficiency<<"Total BG"<<"\t \t \t  "<<std::setprecision(8)<<totalBG<<endl;
             if (fileIterator==nfiles-1) out_efficiency<<"Total MC"<<"\t \t \t  "<<std::setprecision(8)<<totalMC<<endl;
 //            if (fileIterator==nfiles-1) out_efficiency<<"Data/MC"<<"\t \t \t  "<<std::setprecision(3)<<totalData/totalMC<<endl;
-            if (fileIterator==nfiles-1) out_efficiency<<"Data/MC"<<"\t \t \t \t  "<<std::setprecision(8)<<ratio[0]<< " +- " << ratioError[0] <<endl;
+            if (fileIterator==nfiles-1) out_efficiency<<"Data/MC"<<"\t \t \t \t  "<<std::setprecision(8)<<ratio[0]<< " +- " << ratioError[0] <<endl<<endl;
+            if (fileIterator==nfiles-1) out_efficiency<<"Data/MC"<<"\t QCDup   \t \t  "<<std::setprecision(8)<<ratio[1]<< " +- " << ratioError[1] <<endl;
+            if (fileIterator==nfiles-1) out_efficiency<<"Data/MC"<<"\t QCDdown \t \t  "<<std::setprecision(8)<<ratio[2]<< " +- " << ratioError[2] <<endl;
+            if (fileIterator==nfiles-1) out_efficiency<<"Data/MC"<<"\t JESup   \t \t  "<<std::setprecision(8)<<ratio[3]<< " +- " << ratioError[3] <<endl;
+            if (fileIterator==nfiles-1) out_efficiency<<"Data/MC"<<"\t JESdown \t \t  "<<std::setprecision(8)<<ratio[4]<< " +- " << ratioError[4] <<endl;
 //            if (fileIterator==nfiles-1) out_efficiency<<"DY MC scaled with "<<"\t \t \t  "<<std::setprecision(13)<<ratio[0]<<endl;
                 if(file_name_tag.find("DYJetstoLL")!=std::string::npos  ) cout << "ratio4  " << fileIterator << "  "  << ratio[0]  << " +- " << ratioError[0] <<   " \t\t integral : " << histos[0]->Integral(0,histos[0]->GetNbinsX()+1) << endl;
 
@@ -994,6 +1007,47 @@ for (int i=0;i<nhistos;i++){
 		}
 		frame->GetYaxis()->SetTitle(name);
 
+                
+                
+                       
+    
+    ////////////////////////////////////////////// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////            
+    //////////////////////////////////////////////  in hbdt_atanh porta gli ultimi bin all'inizio  //////////////////////////////////////////////////////////////////////   
+    ////////////////////////////////////////////// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////            
+       
+//                 bool oltreBKG = false;
+//                 int lastGood=0;
+//                 TH1F *h_signalVBF_copy = (TH1F*)signal_histos[i]->Clone("signal_histos");
+//                 TH1F *h_signalGLU_copy = (TH1F*)gluonFu_histos[i]->Clone("gluonFu_histos");
+//                 
+//                 if (i==nhistos-1) {
+// 
+//                                     
+//                 for(int m=1; m <= stackHisto[i]->GetNbinsX();++m){
+//                 if( stackHisto[i]->GetBinContent(m) - gluonFu_histos[i]->GetBinContent(m)/20. - signal_histos[i]->GetBinContent(m)/20.<0.5 && oltreBKG == false) {
+//                     oltreBKG = true;
+//                     lastGood=m-1;
+//                 }
+//                 if(oltreBKG){
+//                     signal_histos[i]->SetBinContent(lastGood,signal_histos[i]->GetBinContent(lastGood)+ signal_histos[i]->GetBinContent(m));
+//                     gluonFu_histos[i]->SetBinContent(lastGood,gluonFu_histos[i]->GetBinContent(lastGood)+ gluonFu_histos[i]->GetBinContent(m));
+// //                     stackHisto[i]->SetBinContent(lastGood,stackHisto[i]->GetBinContent(lastGood)+ stackHisto[i]->GetBinContent(m));
+//                     
+//                     signal_histos[i]->SetBinContent(m,0);
+//                     gluonFu_histos[i]->SetBinContent(m,0);
+// //                     stackHisto[i]->SetBinContent(m,0);
+//                 }
+//             }   
+//         }
+                
+    ////////////////////////////////////////////// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////            
+    //////////////////////////////////////////////  in hbdt_atanh porta gli ultimi bin all'inizio  /////////////////////////////////////////////////////////////////////   
+    ////////////////////////////////////////////// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
+                
+                
+                
+                
+                
       frame->Draw();
 		tex->Draw();
 		tex1->Draw();
@@ -1005,8 +1059,8 @@ for (int i=0;i<nhistos;i++){
                 
 		if ((d_value>0.01)&&(d_value<1.)) disc_value_text->Draw();
                 stacks[i]->Draw("same");	
-		signal_histos[i]->Draw("same");
-		gluonFu_histos[i]->Draw("same");
+		signal_histos[i]->Draw("same hist");
+		gluonFu_histos[i]->Draw("same hist");
                 
 
                 
@@ -1014,7 +1068,7 @@ for (int i=0;i<nhistos;i++){
 //                 std::cout << Name_Hist_String << std::endl;
 
 
-                float totalSensitivity=0.;
+
                 if (hist_names[i].CompareTo("hZll_mass")==0) {
                     TH1F *h_below_115 = (TH1F*)data_histos[i]->Clone("Mll_below_115");
                     TH1F *h_above_130 = (TH1F*)data_histos[i]->Clone("Mll_above_130");
@@ -1040,13 +1094,49 @@ for (int i=0;i<nhistos;i++){
                 data_histos[nhistos-1]->GetXaxis()->SetRangeUser(0.,0.5);
 
                 if (i>=nhistos-2) {
+                    float totalSensitivitySquared=0.;   
+                    float totalSensitivitySquaredErrorSquared = 0.;
                         for (int n = 1; n <= signal_histos[i]->GetXaxis()->GetNbins(); ++n) {
-                            float histoBin = signal_histos[i]->GetBinContent(n)/20.;
-                            float staskPos = stackHisto[i]->GetBinContent(n);
-                            if (staskPos < 0.) staskPos = 0.;
-                            totalSensitivity += (histoBin > 0.00001) ? histoBin*histoBin/(histoBin + staskPos) : 0.;
-                            std::cout <<"totalSensitivity " << n << " " << totalSensitivity <<" \t histoBin  " << histoBin  <<" \t stackHisto[i]->GetBinContent(n)  " << stackHisto[i]->GetBinContent(n) << " \t " << staskPos << std::endl;
-//                            totalSensitivity += sensitivity*sensitivity;
+                            float histoBin = signal_histos[i]->GetBinContent(n)/20.;  //  (signal_histos[i]->GetBinContent(n) + gluonFu_histos[i]->GetBinContent(n))/20.;
+                            float histoBinGlu = gluonFu_histos[i]->GetBinContent(n)/20.;
+                            float staskPos = stackHisto[i]->GetBinContent(n) - signal_histos[i]->GetBinContent(n)/20. - gluonFu_histos[i]->GetBinContent(n)/20.;
+                            
+                            float histoBinVBFError  = signal_histos[i]->GetBinError(n)/20.;
+                            float histoBinGluError  = gluonFu_histos[i]->GetBinError(n)/20.;
+                            float histoBinSigError  = sqrt(histoBinVBFError*histoBinVBFError + histoBinGluError*histoBinGluError);
+                            float histoSTACK_Error  = stackHisto[i]->GetBinError(n);
+                            float histoBinBKGError  = sqrt(histoSTACK_Error*histoSTACK_Error - histoBinSigError*histoBinSigError);
+                            
+
+                            
+                            
+                            float Signal_RelativeError = histoBinSigError/(histoBin + histoBinGlu);
+                            float BKG_RelativeError = histoBinBKGError/staskPos;
+                            float SensitivityRelativeError = (histoBin > 0.00001 && staskPos > 0.00001) ? (4*Signal_RelativeError*Signal_RelativeError + BKG_RelativeError*BKG_RelativeError) : 0.;
+                            float SensitivitySquaredErrorSquared = SensitivityRelativeError*histoBin/staskPos*histoBin/staskPos;
+                            totalSensitivitySquaredErrorSquared += SensitivitySquaredErrorSquared;
+                        
+                            
+//                             std::cout <<"bin " << n << " \t\t signal VBF " << histoBin  <<" \t +-  " << histoBinVBFError <<  std::endl;
+//                             std::cout <<"\t\t signal GLU " << histoBinGlu  <<" \t +-  " << histoBinGluError <<  std::endl;
+//                             std::cout <<"\t\t  VBF + GLU " << histoBin + histoBinGlu  <<" \t +-  " << histoBinSigError <<  std::endl;
+//                             std::cout <<"\t\t stack      " << staskPos + histoBin + histoBinGlu <<" \t +-  " << histoSTACK_Error <<  std::endl;
+//                             std::cout <<"\t\t BKG        " << staskPos  <<" \t +-  " << histoBinBKGError <<  std::endl;
+//                             std::cout <<"\t\t relErrors  " <<  Signal_RelativeError <<" \t  " << BKG_RelativeError  << " \t  " << SensitivityRelativeError <<  std::endl;
+                            
+                            
+//                             TFile *file_initial;
+//                             file_initial = TFile::Open(file_names[7]);
+//                             TH1F * h_check = (TH1F *) file_initial->Get("hBDT_VBF_atanh");
+//                             staskPos = h_check->GetBinContent(n)*lumi* ratio[0];
+                            
+                            if (staskPos < 0.) {staskPos = 0.; std::cout << "ATTENTION: staskPos < 0.       -----------------------------------------------------------" <<  std::endl;}
+                            
+                            float binSensitivitySquared = (histoBin > 0.00001 && staskPos > 0.00001) ? histoBin*histoBin/(staskPos) : 0.;
+                            totalSensitivitySquared += binSensitivitySquared;
+                            std::cout <<"bin " << n << " \t signal          " << histoBin  <<" \t bkg    " << staskPos << "  \t " << "bin sensitivity  " << binSensitivitySquared << " \t +- " << SensitivitySquaredErrorSquared << std::endl;
+                            std::cout <<"\t Sensitivity^2   " <<   totalSensitivitySquared<< " \t +-  " << totalSensitivitySquaredErrorSquared  <<  std::endl;
+
                         }
                         
 //                        data_histos[nhistos-1]->GetXaxis()->SetRangeUser(-1.,0.5);
@@ -1054,8 +1144,10 @@ for (int i=0;i<nhistos;i++){
 
 
                         std::ostringstream sigmaString;
-                        sigmaString<<std::setprecision(3)<<totalSensitivity;
-                        TLatex* texSig = new TLatex(0.50,0.85,("Tot sigma = " + sigmaString.str() ).c_str());
+//                         sigmaString<<std::setprecision(3)<<totalSensitivitySquared;
+//                         sigmaString<<std::setprecision(3)<<sqrt(totalSensitivitySquared);
+                        sigmaString<<std::setprecision(3)<<sqrt(totalSensitivitySquared) << " +-" << sqrt(totalSensitivitySquaredErrorSquared/2./sqrt(totalSensitivitySquared));
+                        TLatex* texSig = new TLatex(0.55,0.85,("Tot sigma = " + sigmaString.str() ).c_str());
                         texSig->SetNDC();
                         texSig->SetTextAlign(35);
                         texSig->SetTextFont(42);
